@@ -36,4 +36,9 @@ export class AuthApi {
     const url = `${this.uri()}/logout`;
     return this.http.post<void>(url, {});
   }
+
+  confirmAccount(token: string): Observable<string> {
+    const url = `${this.uri()}/public/confirm-account/${token}`;
+    return this.http.patch<string>(url, {}, { responseType: 'text' as 'json'});
+  }
 }

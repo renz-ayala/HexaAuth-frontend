@@ -1,4 +1,4 @@
 export interface CreateUserResponse {
   message: string;
-  code: number;
+  success: boolean;
 }

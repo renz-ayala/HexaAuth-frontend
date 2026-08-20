@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthApi} from '../../../core/services/auth-api';
 import {CreateUserRequest} from '../../../core/models/create-user-request.model';
+import {AlertService} from '../../../core/services/alert-service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +17,7 @@ export class Register {
   router = inject(Router);
   fb = inject(FormBuilder)
   apiAuth = inject(AuthApi);
+  alertService = inject(AlertService);
 
   registerForm: FormGroup = this.fb.group({
     name: [null, [Validators.required]],
@@ -25,7 +28,7 @@ export class Register {
   });
 
   redirectToLogin(){
-    this.router.navigate(['/Login']).then(() => {});
+    this.router.navigate(['/login']).then(() => {});
   }
 
   createUser() {
@@ -37,9 +40,24 @@ export class Register {
     const newUser: CreateUserRequest = this.registerForm.value;
     this.apiAuth.createUser(newUser).subscribe({
       next: (response) => {
-        console.log(response);
-      }, error: (error) => {
-        console.log(error);
+        if (!response) {
+          this.alertService.show('Hubo problemas creado el usuario', 'error');
+          return;
+        }
+
+        if (!response.success) {
+          this.alertService.show(response.message, 'error');
+          return;
+        }
+
+        this.alertService.show(response.message, 'success');
+        this.alertService.show('Revise su correo para confirmar la cuenta', 'info');
+
+        this.redirectToLogin();
+      }, error: (error: HttpErrorResponse) => {
+        const message = error.error?.detalle || error.error?.error || 'Error en la solicitud';
+        console.error('create-user', error);
+        this.alertService.show(message, 'error');
       }
     });
   }
