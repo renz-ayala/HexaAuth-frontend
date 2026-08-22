@@ -1,6 +1,9 @@
+export type ValueType = 'text' | 'badge' | 'code';
+
 export interface ProfileItem {
   key: string;
   label: string;
   value: string;
-  isMono?: boolean;
+  type?: ValueType;
+  copyable?: boolean;
 }

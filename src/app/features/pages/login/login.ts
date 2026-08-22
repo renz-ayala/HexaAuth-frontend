@@ -2,7 +2,7 @@ import {Component, inject} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {LoginRequest} from '../../../core/models/login-request.model';
-import {AuthApi} from '../../../core/services/auth-api';
+import {AuthApiService} from '../../../core/services/auth-api-service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ import {AuthApi} from '../../../core/services/auth-api';
 export class Login {
   router = inject(Router);
   fb = inject(FormBuilder);
-  authService = inject(AuthApi);
+  authService = inject(AuthApiService);
 
   loginForm: FormGroup = this.fb.group({
     username: [null, [Validators.required]],

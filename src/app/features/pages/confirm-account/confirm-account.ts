@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, inject, OnInit, signal} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthApi } from '../../../core/services/auth-api';
+import { AuthApiService } from '../../../core/services/auth-api-service';
 import { AlertService } from '../../../core/services/alert-service';
 import { finalize } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { finalize } from 'rxjs';
 })
 export class ConfirmAccount implements OnInit {
   private readonly route = inject(ActivatedRoute);
-  private readonly authService = inject(AuthApi);
+  private readonly authService = inject(AuthApiService);
   private readonly alertService = inject(AlertService);
   private readonly router = inject(Router);
   private readonly cdr = inject(ChangeDetectorRef);

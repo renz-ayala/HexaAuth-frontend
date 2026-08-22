@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AuthApi} from '../../../core/services/auth-api';
+import {AuthApiService} from '../../../core/services/auth-api-service';
 import {CreateUserRequest} from '../../../core/models/create-user-request.model';
 import {AlertService} from '../../../core/services/alert-service';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -16,7 +16,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 export class Register {
   router = inject(Router);
   fb = inject(FormBuilder)
-  apiAuth = inject(AuthApi);
+  apiAuth = inject(AuthApiService);
   alertService = inject(AlertService);
 
   registerForm: FormGroup = this.fb.group({

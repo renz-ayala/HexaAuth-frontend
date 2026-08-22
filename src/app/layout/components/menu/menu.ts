@@ -1,15 +1,20 @@
-import {Component, computed, inject} from '@angular/core';
-import {AuthApi} from '../../../core/services/auth-api';
+import {Component, computed, inject, signal} from '@angular/core';
+import {AuthApiService} from '../../../core/services/auth-api-service';
 import {Router} from '@angular/router';
+import {ThemeService} from '../../../core/services/theme-service';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-menu',
-  imports: [],
+  imports: [
+    NgClass
+  ],
   templateUrl: './menu.html',
 })
 export class Menu {
-  authService = inject(AuthApi);
+  authService = inject(AuthApiService);
   router = inject(Router);
+  themeService = inject(ThemeService);
 
   fullname = computed(() => {
     const firstname = this.authService.currentUser()?.firstname;

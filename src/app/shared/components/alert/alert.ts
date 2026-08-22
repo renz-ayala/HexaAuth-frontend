@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {AlertModel, AlertType} from '../../../features/models/alert.model';
+import {AlertType} from '../../../features/models/alert.model';
 import {AlertService} from '../../../core/services/alert-service';
 
 @Component({

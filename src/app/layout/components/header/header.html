@@ -1,28 +1,20 @@
-<header class="border-b border-zinc-800/80 bg-zinc-900/40 backdrop-blur-md sticky top-0 z-10">
-  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-
-    <!-- Branding / Logo -->
+<header class="w-full border-b border-zinc-800/80 bg-zinc-900/40 backdrop-blur-md sticky top-0 z-10">
+  <div class="w-full px-6 h-16 flex items-center justify-between">
     <div class="flex items-center gap-3">
       <div class="w-7 h-7 rounded-lg bg-zinc-100 flex items-center justify-center font-semibold text-zinc-950 text-xs">
-        UA
+        C
       </div>
-      <span class="font-medium text-sm text-zinc-200">userApps</span>
+      <span class="font-medium text-sm text-zinc-200">Corenz</span>
     </div>
 
-    <!-- Dropdown / Popover de Perfil -->
     <div class="relative group">
-
-      <!-- Trigger (Avatar) -->
       <button
         class="cursor-pointer flex items-center gap-2 p-1 rounded-full hover:bg-zinc-800/60 transition-colors focus:outline-none">
         <div class="w-8 h-8 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center font-medium text-xs text-zinc-200 shadow-sm">
-          {{ initials() }}
+          {{ authService.initials() }}
         </div>
       </button>
-
       <app-menu></app-menu>
-
     </div>
-
   </div>
 </header>

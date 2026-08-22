@@ -1,27 +1,87 @@
-<div class="min-h-screen bg-zinc-950 text-zinc-100 font-sans">
+<div class="min-h-screen bg-zinc-950 text-zinc-100 font-sans flex flex-col">
   <app-header></app-header>
-  <div class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
-    <aside class="space-y-1">
-      @for (group of navigationMenu; track group.groupName) {
-        <div class="px-3 pb-2 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
-          {{ group.groupName }}
-        </div>
 
-        <nav class="flex flex-col space-y-1">
-          @for (item of group.items; track item.route) {
-            <a
-              [routerLink]="item.route"
-              routerLinkActive="bg-zinc-800/60 text-white font-medium"
-              class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/80 transition-colors">
-              {{ item.label }}
-            </a>
-          }
-        </nav>
-      }
+  <div class="flex-1 flex overflow-hidden">
+
+    <aside
+      class="bg-zinc-950 border-r border-zinc-800/80 flex flex-col transition-all duration-200 select-none shrink-0"
+      [class.w-64]="isMenuVisible()"
+      [class.w-16]="!isMenuVisible()">
+
+      <div class="h-12 px-3 border-b border-zinc-800/60 flex items-center justify-between">
+        @if (isMenuVisible()) {
+          <span class="text-xs font-semibold text-zinc-300 uppercase tracking-wider pl-1">
+            MENÚ
+          </span>
+        }
+        <button
+          (click)="toggleMenu()"
+          class="p-1.5 rounded-md text-zinc-400 hover:text-white hover:bg-zinc-800/80 transition-colors cursor-pointer"
+          [class.mx-auto]="!isMenuVisible()"
+          [class.ml-auto]="isMenuVisible()"
+          [title]="tooltipMessage()">
+          <svg
+            class="w-4 h-4 transition-transform duration-200"
+            [class.rotate-180]="!isMenuVisible()"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="flex-1 overflow-y-auto p-2 space-y-4">
+        @for (group of navigationMenu(); track group.groupName; let i = $index) {
+          <div class="space-y-1">
+            @if (isMenuVisible()) {
+              <button
+                (click)="toggleNavGroup(i)"
+                class="w-full flex items-center gap-2 px-2 py-1 text-[11px] font-semibold text-zinc-500 hover:text-zinc-300 uppercase tracking-wider transition-colors cursor-pointer group">
+                <svg
+                  class="w-3 h-3 transition-transform duration-200"
+                  [class.-rotate-90]="!group.isExpanded"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+                <span>{{ group.groupName }}</span>
+              </button>
+            }
+
+            @if (group.isExpanded || !isMenuVisible()) {
+              <div class="flex flex-col space-y-1">
+                @for (item of group.items; track item.route) {
+                  <a
+                    [routerLink]="item.route"
+                    routerLinkActive="bg-zinc-800/90 text-white font-medium border-l-2 border-emerald-500"
+                    class="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900 transition-colors relative group/item"
+                    [class.justify-center]="!isMenuVisible()"
+                    [title]="!isMenuVisible() ? item.label : ''">
+
+                    <span
+                      class="w-4 h-4 shrink-0 flex items-center justify-center text-zinc-400 group-hover:text-zinc-200"
+                      [innerHTML]="item.icon | safeHtml">
+                    </span>
+
+                    @if (isMenuVisible()) {
+                      <span class="truncate">{{ item.label }}</span>
+                    }
+                  </a>
+                }
+              </div>
+            }
+          </div>
+        }
+      </nav>
     </aside>
 
-    <main class="md:col-span-3">
-      <router-outlet></router-outlet>
+    <main class="flex-1 overflow-y-auto p-8 bg-zinc-950">
+      <div class="max-w-4xl mx-auto">
+        <router-outlet></router-outlet>
+      </div>
     </main>
+
   </div>
 </div>

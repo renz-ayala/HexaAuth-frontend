@@ -1,35 +1,31 @@
-<section class="bg-zinc-900/40 border border-zinc-800/80 rounded-xl overflow-hidden shadow-sm">
+<section class="bg-zinc-900/40 border border-zinc-800/80 rounded-2xl overflow-hidden shadow-xl backdrop-blur-sm">
 
-  <!-- Encabezado de la Sección -->
-  <div class="p-6 border-b border-zinc-800/80 flex items-center justify-between">
-    <div>
-      <h2 class="text-lg font-medium text-white tracking-tight">Información de Usuario</h2>
-      <p class="text-xs text-zinc-400 mt-0.5">Detalles generales de tu cuenta registrada.</p>
+  <div class="p-6 border-b border-zinc-800/80 flex items-center justify-between gap-4 bg-zinc-900/20">
+    <div class="flex items-center gap-4">
+      <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-zinc-700 to-zinc-900 border border-zinc-700/80 flex items-center justify-center font-semibold text-zinc-100 text-sm shadow-inner">
+        {{ authService.initials() }}
+      </div>
+      <div>
+        <h2 class="text-base font-semibold text-white tracking-tight">Información de Usuario</h2>
+        <p class="text-xs text-zinc-400">Detalles generales de tu cuenta registrada.</p>
+      </div>
     </div>
-    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-      Activo
-    </span>
   </div>
 
-  <!-- Estructura tipo Tabla / Lista de Filas -->
-  <div class="divide-y divide-zinc-800/60">
+  <div class="divide-y divide-zinc-800/50">
+    @for (item of details(); track item.key) {
+      <div class="px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-zinc-800/30 transition-colors group">
+        <span class="text-xs font-medium text-zinc-400 group-hover:text-zinc-300 transition-colors">
+          {{ item.label }}
+        </span>
 
-    <div class="px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-zinc-900/60 transition-colors">
-      <span class="text-xs font-medium text-zinc-400">Nombre de usuario</span>
-      <span class="text-sm font-medium text-zinc-100">{{ authService.currentUser()?.username }}</span>
-    </div>
-
-    <div class="px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-zinc-900/60 transition-colors">
-      <span class="text-xs font-medium text-zinc-400">Correo electrónico</span>
-      <span class="text-sm font-medium text-zinc-100 font-mono">{{ authService.currentUser()?.email }}</span>
-    </div>
-
-    <div class="px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-zinc-900/60 transition-colors">
-      <span class="text-xs font-medium text-zinc-400">Estado de verificación</span>
-      <span class="text-xs font-medium text-zinc-300">Correo verificado</span>
-    </div>
-
+        <div class="flex items-center">
+          <span [ngClass]="getItemClasses(item.type)">
+            {{ item.value }}
+          </span>
+        </div>
+      </div>
+    }
   </div>
 
 </section>

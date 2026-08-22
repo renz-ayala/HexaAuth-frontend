@@ -1,5 +1,5 @@
-import {Component, computed, inject} from '@angular/core';
-import {AuthApi} from '../../../core/services/auth-api';
+import {Component, inject} from '@angular/core';
+import {AuthApiService} from '../../../core/services/auth-api-service';
 import {Router} from '@angular/router';
 import {Menu} from '../menu/menu';
 
@@ -11,13 +11,6 @@ import {Menu} from '../menu/menu';
   templateUrl: './header.html',
 })
 export class Header {
-  authService = inject(AuthApi);
+  authService = inject(AuthApiService);
   router = inject(Router);
-
-  initials = computed(() => {
-    const nameFirstLetter = this.authService.currentUser()?.firstname.substring(0, 1);
-    const lastnameFistLetter = this.authService.currentUser()?.lastname.substring(0, 1);
-    return `${nameFirstLetter}${lastnameFistLetter}`;
-  });
-
 }

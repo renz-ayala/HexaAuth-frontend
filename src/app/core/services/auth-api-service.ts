@@ -10,12 +10,18 @@ import {CreateUserResponse} from '../models/create-user-response.model';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthApi {
+export class AuthApiService {
   private readonly http = inject(HttpClient)
 
   private readonly uri = computed(() => `${environment.urlAuth}/users`);
 
   currentUser = signal<LoginResponse | null>(null);
+  initials = computed(() => {
+    const nameFirstLetter = this.currentUser()?.firstname.substring(0, 1);
+    const lastnameFistLetter = this.currentUser()?.lastname.substring(0, 1);
+    const initials = `${nameFirstLetter}${lastnameFistLetter}`;
+    return initials.toUpperCase();
+  });
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
     const url = `${this.uri()}/public/log-in`;

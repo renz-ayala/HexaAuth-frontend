@@ -7,4 +7,5 @@ export interface NavItem {
 export interface NavGroup {
   groupName: string;
   items: NavItem[];
+  isExpanded: boolean;
 }
