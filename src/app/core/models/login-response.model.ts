@@ -3,4 +3,7 @@ export interface LoginResponse {
   roles: string[];
   message: string;
   success: boolean;
+  firstname: string;
+  lastname: string;
+  email: string;
 }
