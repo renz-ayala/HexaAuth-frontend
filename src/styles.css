@@ -16,4 +16,7 @@ html:not([data-theme="custom"]) {
   --color-zinc-100: var(--color-base-content);
   --color-white: var(--color-base-content);
 }
+html:not([data-theme="custom"]) ::placeholder {
+  opacity: 0.4;
+}
 

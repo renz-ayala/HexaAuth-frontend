@@ -1,10 +1,6 @@
-<!-- Contenedor Principal (Pantalla completa centrada) -->
 <div class="min-h-screen bg-zinc-950 text-zinc-100 flex items-center justify-center p-4">
-
-  <!-- Tarjeta de Login estilo Vercel -->
   <div class="w-full max-full max-w-md bg-zinc-900/60 border border-zinc-800/80 rounded-xl p-8 shadow-2xl backdrop-blur-sm">
 
-    <!-- Encabezado / Branding -->
     <div class="mb-8 text-center">
       <h1 class="text-2xl font-semibold tracking-tight text-white mb-2">
         Iniciar Sesión
@@ -14,10 +10,7 @@
       </p>
     </div>
 
-    <!-- Formulario -->
     <form [formGroup]="loginForm" class="space-y-5" (ngSubmit)="login()">
-
-      <!-- Campo Username -->
       <div class="form-control w-full">
         <label class="label pl-0 pb-1.5">
           <span class="label-text text-xs font-medium text-zinc-300">Usuario</span>
@@ -31,37 +24,35 @@
         />
       </div>
 
-      <!-- Campo Password -->
       <div class="form-control w-full">
         <div class="flex justify-between items-center pb-1.5">
           <label class="label pl-0 p-0">
             <span class="label-text text-xs font-medium text-zinc-300">Contraseña</span>
           </label>
-          <!-- Enlace secundario para recuperar -->
-          <a href="#" class="text-xs text-zinc-400 hover:text-white transition-colors">
+          <a href="#" tabindex="-1" class="text-xs text-zinc-400 hover:text-white transition-colors">
             ¿Olvidaste tu contraseña?
           </a>
         </div>
-        <input
-          type="password"
-          formControlName="password"
-          placeholder="••••••••"
-          class="input input-bordered w-full bg-zinc-950/80 border-zinc-800 text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 text-sm transition-all"
-          required
+
+        <app-password-input
+          [value]="loginForm.get('password')?.value"
+          (valueChange)="loginForm.get('password')?.setValue($event)"
         />
       </div>
 
-      <!-- Botón Principal Vercel (Blanco sobre oscuro, alto contraste) -->
       <button
         type="submit"
+        [appLoading]="isLoading()"
         class="btn w-full bg-zinc-100 hover:bg-white text-zinc-950 font-medium border-0 rounded-lg text-sm mt-2 transition-all shadow-sm"
       >
-        Ingresar
+        @if (isLoading()) {
+          <span-spinner text="Validando..."></span-spinner>
+        } @else {
+          <span>Ingresar</span>
+        }
       </button>
-
     </form>
 
-    <!-- Footer de la tarjeta / Enlace a Registro -->
     <div class="mt-6 text-center text-xs text-zinc-400">
       ¿No tienes una cuenta?
       <a (click)="redirectToRegister()" class="cursor-pointer text-zinc-200 hover:text-white font-medium underline underline-offset-4 transition-colors">
@@ -70,5 +61,4 @@
     </div>
 
   </div>
-
 </div>

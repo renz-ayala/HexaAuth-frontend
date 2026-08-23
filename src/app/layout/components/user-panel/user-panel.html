@@ -1,7 +1,5 @@
-<!-- Flotante -->
 <div class="absolute right-0 mt-2 w-60 bg-zinc-900/95 border border-zinc-800/90 rounded-xl shadow-xl p-2.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 backdrop-blur-md z-50">
 
-  <!-- Usuario -->
   <div class="px-2 py-1.5 border-b border-zinc-800/80 mb-1.5">
     <p class="text-xs font-medium text-white truncate">{{ fullname()}}</p>
     <p class="text-[11px] text-zinc-400 truncate font-mono mt-0.5">{{ authService.currentUser()?.email }}</p>
@@ -34,9 +32,15 @@
   <div class="border-t border-zinc-800/80 my-1"></div>
 
   <button
+    [appLoading]="isLoading()"
     (click)="logout()"
-    class="cursor-pointer w-full text-left px-2 py-1.5 rounded-lg text-xs text-red-400 hover:bg-red-500/10 transition-colors font-medium">
-    Cerrar Sesión
+    class="cursor-pointer w-full text-left px-2 py-1.5 rounded-lg text-xs text-red-400 hover:bg-red-500/10 transition-colors font-medium"
+  >
+    @if (isLoading()) {
+      <span-spinner text="Cerrando sesión..."></span-spinner>
+    } @else {
+      <span>Cerrar Sesión</span>
+    }
   </button>
 
 </div>

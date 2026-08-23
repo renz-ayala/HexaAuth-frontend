@@ -1,13 +1,12 @@
 import {Component, inject} from '@angular/core';
 import {AuthApiService} from '../../../core/services/auth-api-service';
 import {Router} from '@angular/router';
-import {Menu} from '../menu/menu';
+import {UserPanel} from '../user-panel/user-panel';
+import {SearchBar} from '../search-bar/search-bar';
 
 @Component({
   selector: 'app-header',
-  imports: [
-    Menu
-  ],
+  imports: [UserPanel, SearchBar],
   templateUrl: './header.html',
 })
 export class Header {

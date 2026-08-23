@@ -1,15 +1,22 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthApiService} from '../../../core/services/auth-api-service';
 import {CreateUserRequest} from '../../../core/models/create-user-request.model';
 import {AlertService} from '../../../core/services/alert-service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {LoadingDirective} from '../../../shared/directives/loading-directive';
+import {SpanSpinner} from '../../../shared/components/spinner/span-spinner';
+import {finalize} from 'rxjs';
+import {PasswordInput} from '../../../shared/components/password-input/password-input';
 
 @Component({
   selector: 'app-register',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LoadingDirective,
+    SpanSpinner,
+    PasswordInput
   ],
   templateUrl: './register.html',
 })
@@ -18,6 +25,8 @@ export class Register {
   fb = inject(FormBuilder)
   apiAuth = inject(AuthApiService);
   alertService = inject(AlertService);
+
+  isLoading = signal(false);
 
   registerForm: FormGroup = this.fb.group({
     name: [null, [Validators.required]],
@@ -37,8 +46,12 @@ export class Register {
       return;
     }
 
+    this.isLoading.set(true);
+
     const newUser: CreateUserRequest = this.registerForm.value;
-    this.apiAuth.createUser(newUser).subscribe({
+    this.apiAuth.createUser(newUser)
+      .pipe(finalize(() => this.isLoading.set(false)))
+      .subscribe({
       next: (response) => {
         if (!response) {
           this.alertService.show('Hubo problemas creado el usuario', 'error');

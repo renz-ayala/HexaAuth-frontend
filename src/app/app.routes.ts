@@ -1,8 +1,6 @@
 import { Routes } from '@angular/router';
 import {Login} from './features/pages/login/login';
 import {authGuard} from './core/guards/auth-guard';
-import {Profile} from './features/pages/dashboard/sections/profile/profile';
-import {ChangePassword} from './features/pages/dashboard/sections/change-password/change-password';
 
 export const routes: Routes = [
   {

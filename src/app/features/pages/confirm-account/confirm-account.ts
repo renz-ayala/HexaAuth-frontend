@@ -10,11 +10,11 @@ import { finalize } from 'rxjs';
   templateUrl: './confirm-account.html',
 })
 export class ConfirmAccount implements OnInit {
-  private readonly route = inject(ActivatedRoute);
-  private readonly authService = inject(AuthApiService);
-  private readonly alertService = inject(AlertService);
-  private readonly router = inject(Router);
-  private readonly cdr = inject(ChangeDetectorRef);
+  route = inject(ActivatedRoute);
+  authService = inject(AuthApiService);
+  alertService = inject(AlertService);
+  router = inject(Router);
+  cdr = inject(ChangeDetectorRef);
 
   isLoading = signal(true);
   message = signal('');

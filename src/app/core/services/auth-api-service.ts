@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {LoginResponse} from '../models/login-response.model';
 import {CreateUserRequest} from '../models/create-user-request.model';
 import {CreateUserResponse} from '../models/create-user-response.model';
+import {ChangePasswordRequest} from '../models/change-password-request.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,7 @@ export class AuthApiService {
   private readonly uri = computed(() => `${environment.urlAuth}/users`);
 
   currentUser = signal<LoginResponse | null>(null);
+
   initials = computed(() => {
     const nameFirstLetter = this.currentUser()?.firstname.substring(0, 1);
     const lastnameFistLetter = this.currentUser()?.lastname.substring(0, 1);
@@ -39,6 +41,7 @@ export class AuthApiService {
   }
 
   logout(): Observable<void> {
+    this.currentUser.set(null);
     const url = `${this.uri()}/logout`;
     return this.http.post<void>(url, {});
   }
@@ -46,5 +49,10 @@ export class AuthApiService {
   confirmAccount(token: string): Observable<string> {
     const url = `${this.uri()}/public/confirm-account/${token}`;
     return this.http.patch<string>(url, {}, { responseType: 'text' as 'json'});
+  }
+
+  changePassword(request: ChangePasswordRequest): Observable<void> {
+    const url = `${this.uri()}/change-password`;
+    return this.http.patch<void>(url, request);
   }
 }

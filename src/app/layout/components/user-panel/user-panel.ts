@@ -3,18 +3,24 @@ import {AuthApiService} from '../../../core/services/auth-api-service';
 import {Router} from '@angular/router';
 import {ThemeService} from '../../../core/services/theme-service';
 import {NgClass} from '@angular/common';
+import {LoadingDirective} from '../../../shared/directives/loading-directive';
+import {SpanSpinner} from '../../../shared/components/spinner/span-spinner';
 
 @Component({
-  selector: 'app-menu',
+  selector: 'app-user-panel',
   imports: [
-    NgClass
+    NgClass,
+    LoadingDirective,
+    SpanSpinner
   ],
-  templateUrl: './menu.html',
+  templateUrl: './user-panel.html',
 })
-export class Menu {
+export class UserPanel {
   authService = inject(AuthApiService);
   router = inject(Router);
   themeService = inject(ThemeService);
+
+  isLoading = signal(false);
 
   fullname = computed(() => {
     const firstname = this.authService.currentUser()?.firstname;
@@ -23,9 +29,16 @@ export class Menu {
   })
 
   logout(): void {
+    this.isLoading.set(true);
     this.authService.logout().subscribe({
-        next: () => this.router.navigate(['login']),
-        error: () => this.router.navigate(['login'])
+        next: () => {
+          this.isLoading.set(false);
+          this.router.navigate(['login']).then(() => {});
+        },
+        error: () => {
+          this.isLoading.set(false);
+          this.router.navigate(['login']).then(() => {});
+        }
     });
   }
 
