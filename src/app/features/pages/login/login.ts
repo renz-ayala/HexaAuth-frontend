@@ -37,6 +37,10 @@ export class Login {
     this.router.navigate(['/register']).then(() => {});
   }
 
+  redirectToRecover() {
+    this.router.navigate(['/recover-account']).then(() => {});
+  }
+
   login(){
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();

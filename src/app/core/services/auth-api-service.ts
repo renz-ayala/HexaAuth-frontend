@@ -7,6 +7,8 @@ import {LoginResponse} from '../models/login-response.model';
 import {CreateUserRequest} from '../models/create-user-request.model';
 import {CreateUserResponse} from '../models/create-user-response.model';
 import {ChangePasswordRequest} from '../models/change-password-request.model';
+import {ForgotPasswordRequest} from '../models/forgot-password-request.model';
+import {ResetPasswordRequest} from '../models/reset-password-request.model';
 
 @Injectable({
   providedIn: 'root',
@@ -54,5 +56,15 @@ export class AuthApiService {
   changePassword(request: ChangePasswordRequest): Observable<void> {
     const url = `${this.uri()}/change-password`;
     return this.http.patch<void>(url, request);
+  }
+
+  recoverAccount(request: ForgotPasswordRequest): Observable<void> {
+    const url = `${this.uri()}/public/forgot-password`;
+    return this.http.post<void>(url, request);
+  }
+
+  resetPassword(request: ResetPasswordRequest): Observable<LoginResponse> {
+    const url = `${this.uri()}/public/reset-password`;
+    return this.http.patch<LoginResponse>(url, request);
   }
 }
