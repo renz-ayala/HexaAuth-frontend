@@ -67,4 +67,14 @@ export class AuthApiService {
     const url = `${this.uri()}/public/reset-password`;
     return this.http.patch<LoginResponse>(url, request);
   }
+
+  inactiveAccount(): Observable<void> {
+    const url = `${this.uri()}/inactive/me`;
+    return this.http.delete<void>(url);
+  }
+
+  deleteAccount(): Observable<void> {
+    const url = `${this.uri()}/del/me`;
+    return this.http.delete<void>(url);
+  }
 }

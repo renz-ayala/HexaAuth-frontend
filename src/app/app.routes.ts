@@ -47,6 +47,10 @@ export const routes: Routes = [
         loadComponent: () => import('./features/pages/dashboard/sections/profile/profile').then(m => m.Profile),
       },
       {
+        path: 'inactivate-account',
+        loadComponent: () => import('./features/pages/dashboard/sections/inactive-user/inactive-user').then(m => m.InactiveUser)
+      },
+      {
         path: '**',
         redirectTo: '',
       }

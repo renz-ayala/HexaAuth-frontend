@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {AuthApiService} from '../../../core/services/auth-api-service';
 import {AlertService} from '../../../core/services/alert-service';
 import {Router} from '@angular/router';
-import {SpanSpinner} from '../../../shared/components/spinner/span-spinner';
+import {SpanSpinner} from '../../../shared/components/span-spinner/span-spinner';
 import {finalize} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 import {LoadingDirective} from '../../../shared/directives/loading-directive';

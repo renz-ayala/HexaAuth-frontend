@@ -6,7 +6,7 @@ import {CreateUserRequest} from '../../../core/models/create-user-request.model'
 import {AlertService} from '../../../core/services/alert-service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {LoadingDirective} from '../../../shared/directives/loading-directive';
-import {SpanSpinner} from '../../../shared/components/spinner/span-spinner';
+import {SpanSpinner} from '../../../shared/components/span-spinner/span-spinner';
 import {finalize} from 'rxjs';
 import {PasswordInput} from '../../../shared/components/password-input/password-input';
 

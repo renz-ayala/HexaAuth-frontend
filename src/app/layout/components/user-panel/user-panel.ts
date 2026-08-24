@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {ThemeService} from '../../../core/services/theme-service';
 import {NgClass} from '@angular/common';
 import {LoadingDirective} from '../../../shared/directives/loading-directive';
-import {SpanSpinner} from '../../../shared/components/spinner/span-spinner';
+import {SpanSpinner} from '../../../shared/components/span-spinner/span-spinner';
 
 @Component({
   selector: 'app-user-panel',

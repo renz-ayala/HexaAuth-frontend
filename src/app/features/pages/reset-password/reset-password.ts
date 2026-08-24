@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthApiService} from '../../../core/services/auth-api-service';
 import {PasswordInput} from '../../../shared/components/password-input/password-input';
 import {LoadingDirective} from '../../../shared/directives/loading-directive';
-import {SpanSpinner} from '../../../shared/components/spinner/span-spinner';
+import {SpanSpinner} from '../../../shared/components/span-spinner/span-spinner';
 import {finalize} from 'rxjs';
 import {AlertService} from '../../../core/services/alert-service';
 import {HttpErrorResponse} from '@angular/common/http';

@@ -6,7 +6,7 @@ import {AuthApiService} from '../../../core/services/auth-api-service';
 import {PasswordInput} from '../../../shared/components/password-input/password-input';
 import {LoadingDirective} from '../../../shared/directives/loading-directive';
 import {finalize} from 'rxjs';
-import {SpanSpinner} from '../../../shared/components/spinner/span-spinner';
+import {SpanSpinner} from '../../../shared/components/span-spinner/span-spinner';
 import {HttpErrorResponse} from '@angular/common/http';
 import {AlertService} from '../../../core/services/alert-service';
 

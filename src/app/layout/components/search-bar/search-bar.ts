@@ -25,6 +25,8 @@ export class SearchBar {
   routesList = signal<SearchResult[]>([
     { label: 'Ver perfil', route: '/dashboard/profile', category: 'Cuenta' },
     { label: 'Cambiar contraseña', route: '/dashboard/change-password', category: 'Ajustes' },
+    { label: 'Inactivar cuenta', route: '/dashboard/inactivate-account', category: 'Ajustes' },
+    { label: 'Eliminar cuenta', route: '/dashboard/inactivate-account', category: 'Ajustes' },
   ]);
 
   results = computed(() => {
