@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/v1/api/:path*",
+      "destination": "https://ms-corenz.onrender.com/v1/api/:path*"
+    }
+  ]
+}
