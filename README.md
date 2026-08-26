@@ -6,6 +6,9 @@ Cliente web desarrollado en Angular para la gestión de usuarios, autenticación
 
 La aplicación se encuentra desplegada en Vercel:
 * URL: https://corenz.vercel.app/
+* Para hacer uso del sistema ingrese aquí https://ms-corenz.onrender.com/, iniciará el servicio de render. Esto puede tomar varios unos minutos hasta que cargue la siguiente pantalla. Hecho esto podrá hacer uso de la demo sin problemas.
+  <img width="805" height="312" alt="image" src="https://github.com/user-attachments/assets/3e2fd1a2-de79-4e8a-8b0c-24a73396b879" />
+
 
 Nota: Para validar el flujo completo de activación de cuenta y recuperación de credenciales, se puede realizar el registro utilizando una dirección de correo real.
 
